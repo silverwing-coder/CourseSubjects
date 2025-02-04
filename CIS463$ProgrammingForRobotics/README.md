@@ -23,7 +23,7 @@ int OUT_PIN = 16;
 
 ```
 
-<h4>1-2. Ultrasonic Distance Sensor</h4>
+<h4>1-2. Ultrasonic Distance Sensor(HC-SR04)</h4>
 <ul>
 Measure distance from an object. 
 <li> If distance is larger than 10 cm --> Green LED on</li>
@@ -101,7 +101,7 @@ while True:
 
 ```
 
-<h4>2-2. Ultrasonic Distance Sensor </h4>
+<h4>2-2. Ultrasonic Distance Sensor(HC-SR04)</h4>
 
 ```python
 # main.py
