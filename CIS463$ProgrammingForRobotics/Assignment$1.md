@@ -69,13 +69,7 @@ void loop() {
   Serial.print("Distance (cm): ");
   Serial.println(dist_cm);
 
-  if (dist_cm < 10) {
-    digitalWrite(GREEN_LT, LOW);
-    digitalWrite(RED_LT, HIGH);
-  } else {
-    digitalWrite(GREEN_LT, HIGH);
-    digitalWrite(RED_LT, LOW);
-  }
+   //*** FIX-ME ***//
 
   // Wait 100 mili-seconds
   delay(100);
@@ -141,12 +135,8 @@ while True:
     pulse_time = get_pulse_time()
     distance_cm = (pulse_time/2) * SOUND_VELOCITY
     print('Distance ', distance_cm, ' (cm)')
-    if (distance_cm > 10):
-        green_lt.value(1)
-        red_lt.value(0)
-    else:
-        green_lt.value(0)
-        red_lt.value(1)
+
+    ### FIX-ME ###
 
     time.sleep(1)
 
