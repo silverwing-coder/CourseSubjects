@@ -1,156 +1,24 @@
 <h3>Update: Jan-2025 by Sangmork Park at VMI</h3>
 <h2>This Repository is Created to Manage CIS 463 Course at VMI</h2>
 
-<h3>1. C-programming on Arduino IDE </h3>
-<h4>1-1. LED blink </h4>
+<h3>Course Description</h3>
+<p>This course is a research-oriented, practical project program which provides students with a fundamental knowledge of programming for robotics, aerial vehicle operations, and competencies in building an aerial or ground vehicle. Throughout this course, a group research project will be executed with 2~3 students in each group.  We will cover microcomputer/microcontroller programming for an aerial or ground vehicle and its component devices on computer vision, machine learning, and computer network APIs. Students will utilize lab supplies of a robot assembly kit, single board micro-computer, micro-controller, different electronic sensors, and networking devices.</p>
 
-```c
-int OUT_PIN = 16;
-
-  void setup() {
-    pinMode(OUT_PIN, OUTPUT);  // Set the output pin
-  }
-
-  // loop() function is the same as while(1)
-  void loop() {
-    digitalWrite(OUT_PIN, LOW);  // Turn the LED off
-    delay(2000);                 // Wait for a second
-    digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED on
-    delay(2000);                      // Wait for two seconds
-  }
-
-}
-
-```
-
-<h4>1-2. Ultrasonic Distance Sensor(HC-SR04)</h4>
+<h3>Course Outlines</h3>
+<p>Upon successful completion of this course, the students will be able to</p>
 <ul>
-Measure distance from an object. 
-<li> If distance is larger than 10 cm --> Green LED on</li>
-<li> If distance is shorter than 10 cm --> Red LED on</li>
+<li>Construct and operate an aerial vehicle while understanding its systems, operations, and legal constraints.</li>
+<li>Develop a program for aerial and ground vehicles utilizing open-source APIs and micro-UAV communication interfaces.</li>
+<li>Construct a data streaming server/client application for the remote control of the aerial and ground robots over IP/Wi-Fi network.</li>
+<li>Utilize open-source machine learning models and techniques based on computer vision to implement object detection and tracking systems.</li>
+<li>Employ inter-process communication, multi-processing, and multi-threading technologies to implement the construction of independent communication channels.</li>
+<li>Design basic 3-D model using CAD tools and produce the model with a 3-D printer.</li>
 </ul>
 
-```c
-// Set pin out: PWR on board --> Vin, GND on board --> GND
-int GREEN_LT = 16;
-int RED_LT = 5;
-int ECHO = 12;          // Echo pin
-int TRIG = 14;          // Trigger pin
-
-#define SOUND_VELOCITY 0.034    // 340 meter per second
-
-long duration;          // Time from Trigger to Echo
-float dist_cm;
-
-void setup() {
-  Serial.begin(115200);     // for Serial Monitor output (115200 baud)
-
-  pinMode(TRIG, OUTPUT);    // Trigger pin --> sound output
-  pinMode(ECHO, INPUT);     // Echo pin --> receiver sensor
-
-  pinMode(GREEN_LT, OUTPUT);  // Green LED pin
-  pinMode(RED_LT, OUTPUT);    // Red LED pin
-}
-
-void loop() {
-
-  // Clear Trigger pin
-  digitalWrite(TRIG, LOW);
-  delayMicroseconds(2);
-
-  // Send out sound signal
-  digitalWrite(TRIG, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG, LOW);
-
-  // Receive returning sound signal
-  duration = pulseIn(ECHO, HIGH);
-  dist_cm = duration * SOUND_VELOCITY / 2;
-
-  // Transfer data through Serial port
-  Serial.print("Distance (cm): ");
-  Serial.println(dist_cm);
-
-  if (dist_cm < 10) {
-    digitalWrite(GREEN_LT, LOW);
-    digitalWrite(RED_LT, HIGH);
-  } else {
-    digitalWrite(GREEN_LT, HIGH);
-    digitalWrite(RED_LT, LOW);
-  }
-
-  // Wait 100 mili-seconds
-  delay(100);
-}
-
-```
-
-<h3>2.  MicroPython programming on Thonny IDE </h3>
-<h4>2-1. LED blink </h4>
-
-```python
-from machine import Pin
-from time import sleep
-
-led = Pin(16, Pin.OUT)
-while True:
-  led.on()
-  sleep(1)
-  led.off()
-  sleep(1)
-
-```
-
-<h4>2-2. Ultrasonic Distance Sensor(HC-SR04)</h4>
-
-```python
-# main.py
-
-import machine
-
-from machine import Pin
-import time
-
-TRIG_PIN = 14
-ECHO_PIN = 12
-GREEN_PIN = 16
-RED_PIN = 5
-
-SOUND_VELOCITY = 0.034
-
-trigger = Pin(TRIG_PIN, Pin.OUT, pull=None)
-echo = Pin(ECHO_PIN, Pin.IN, pull=None)
-
-green_lt = Pin(GREEN_PIN, Pin.OUT)
-red_lt = Pin(RED_PIN, Pin.OUT)
-
-def get_pulse_time():
-    trigger.value(0)
-    time.sleep_us(5)
-    trigger.value(1)
-    time.sleep_us(10)
-    trigger.value(0)
-#    return machine.time_pulse_us(echo, 1)
-    try:
-        pulse_time = machine.time_pulse_us(echo, 1)
-        return pulse_time
-    except OSSError as ex:
-        if ex.args[0] == 110:
-            raise OSError('Out of Range')
-        raise ex
-
-while True:
-    pulse_time = get_pulse_time()
-    distance_cm = (pulse_time/2) * SOUND_VELOCITY
-    print('Distance ', distance_cm, ' (cm)')
-    if (distance_cm > 10):
-        green_lt.value(1)
-        red_lt.value(0)
-    else:
-        green_lt.value(0)
-        red_lt.value(1)
-
-    time.sleep(1)
-
-
-```
+<h3>Textbooks</h3>
+<ul>
+<li>Drone Development from Concept to Flight, Packt, ISBN-13: 978-1837633005</li>
+<li>Robotics, Vision and Control, Springer, ISBN-13: 978-3031064685</li>
+<li>Learning OpenCV, Computer Vison with Python3 3rd Edition by Joseph Howse and Joe Minichino, Packt Publishing, ISBN-13: 978-1789531619</li>
+<li>Computer Networking: Top-Down Approach 7th Edition by Kurose and Ross, Pearson, ISBN-13: 978-0133594140</li>
+</ul>
