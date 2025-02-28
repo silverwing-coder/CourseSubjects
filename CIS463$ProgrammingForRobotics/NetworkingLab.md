@@ -26,32 +26,31 @@
 
 import socket
 
-def main():
+# SERVER_IP = 'localhost'
+SERVER_IP = '127.0.0.1'
+SERVER_PORT = 8888
 
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
-        server.bind(('127.0.0.1', 9999))
-        server.listen(5)
-        print('tcp server waiting ....')
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
 
-        client_connection, client_address = server.accept()
-        print(f'connection accepted from {client_address}')
+    server.bind((SERVER_IP, SERVER_PORT))
+    server.listen(5)
+    print('TCP Echo server is listening .... ')
 
-        while True:
-            
-            recv_data = client_connection.recv(1024).decode()
-            if not recv_data:
-                break
-            print(f'received: {recv_data}')
+    client_conn, client_addr = server.accept()
+    print(f'conneted to {client_addr}')
 
-            client_connection.sendall(recv_data.encode())
-            print(f'sent: {recv_data}')
+    while True:
+        data = client_conn.recv(1024)
+        print(f'received: {data}')
 
-        client_connection.close()
-        server.close()
-
-            
-if __name__ == '__main__':
-    main()
+        if(data.decode() == 'qq'):
+            server.close()
+            break
+        elif(data.decode() == ''):
+            server.close()
+            break
+        else:
+            client_conn.send(data)
 
 ```
 
@@ -67,25 +66,40 @@ if __name__ == '__main__':
 # 4. Send and receive data from the server 
 
 import socket
+import time
+import sys
 
-def main():
+SEVER_IP = 'localhost'
+SERVER_PORT = 8888
+BUFFER_SZ = 1024
 
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
-        client.connect(('127.0.0.1', 9999))
-        # client.sendall(b'Hello, Server!')
-        client.sendall('Hello, Server!'.encode())
-        data = client.recv(1024)
-        print(f'received back: {data}')
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
+    client.connect((SEVER_IP, SERVER_PORT))
 
-        client.close()
+    while True:
 
-if __name__ == '__main__':
-    main()
+        message = input("")
+
+        if(message == 'qq'):
+            client.send(message.encode("utf-8"))
+            print(f'message {message} sent.')
+            time.sleep(0.5)
+            client.close()
+            # sys.exit()
+            break
+        elif(message == ''):
+            continue
+        else:
+            client.send(message.encode("utf-8"))
+            print(f'message {message} sent.')
+
+            return_data = client.recv(BUFFER_SZ)
+            print(f'{return_data} returned')
 
 ```
 
 
-<h3>2. Server/Client on Connectionless (UDP Socket</h3>
+<h3>2. Server/Client on Connectionless (UDP Socket)</h3>
 <h3>2-1. UDP Echo Server (Single Processing ....)</h3>
 
 ``` python
@@ -100,35 +114,28 @@ if __name__ == '__main__':
 
 import socket
 
-# BUFER_SIZE = 65535
-BUFER_SIZE = 1024
+SERVER_IP = 'localhost'
+SERVER_PORT = 8888
+BUFFER_SZ = 1024
 
-def main():
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as server:
+    server.bind((SERVER_IP, SERVER_PORT))
+    print('UDP server listening .... ')
 
-    # with statement automatically close the socket at the end of the block 
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as server:
-        server.bind(('127.0.0.1', 9999))
-        print('UDP server is up and waiting ..... ')
-        
-        recv_data, client_address = server.recvfrom(BUFER_SIZE)
-        print(f'Connected from: {client_address}')
-        print(f'Received data: {recv_data}')
-        server.close()
-                
-        # while True:
-        #     recv_data, client_address = server.recvfrom(BUFER_SIZE)
-        #     print(f'Connected from: {client_address}')
-        #     print(f'Received data: {recv_data}')
+    while True:
+        message, client_addr = server.recvfrom(BUFFER_SZ)
+        print(f'UDP connection from {client_addr}')
+        print(f'{message} received')
 
-        #     if (recv_data.decode().lower() == 'quit'):
-        #         break
-
-        #     server.sendto(recv_data, client_address)
-        #     print(f'Data returned to {client_address[0]}')
-
-
-if __name__ == '__main__':
-    main()
+        if (message.decode() == 'qq'):
+            server.close()
+            break
+        elif (message.decode() == ''):
+            server.close()
+            break
+        else:
+            server.sendto(message, client_addr)
+            print(f'{message} sent back')
 
 ```
 
@@ -143,35 +150,28 @@ if __name__ == '__main__':
 # 3. send message to (ip-address, port-number) and disconnect
 
 import socket
+import time
 
-def main():
+SERVER_IP = 'localhost'
+SERVER_PORT = 8888
+BUFFER_SZ = 1024
 
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as client:
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as client:
 
-        client.sendto(b'Hello Server... ', ('127.0.0.1', 9999))
+    while True:
 
-        ## process wait for  to receiv
-        # data = client.recv(1024)
-        # print(f'Message returned: {data}')
-        
-        client.close()
-
-      
-        # while True:
-        #     message = input('Message?, to exit QUIT ')
-        #     if message == 'QUIT':
-        #         client.sendto(b'quit', ('127.0.0.1', 9999))
-        #         break
-
-        #     message = message.encode('utf-8')
-        #     client.sendto(message, ('127.0.0.1', 9999))
-            
-        #     data = client.recv(1024)
-        #     print(f'Message returned: {data}')
-
-        #     client.close()
-
-if __name__ == '__main__':
-    main()
+        message = input('')
+        if(message == 'qq'):
+            client.sendto(message.encode(), (SERVER_IP, SERVER_PORT))
+            time.sleep(0.5)
+            client.close()
+            break
+        elif(message == ''):
+            continue
+        else:
+            client.sendto(message.encode(), (SERVER_IP, SERVER_PORT))
+            print(f'{message} sent')
+            return_message, addr = client.recvfrom(BUFFER_SZ)
+            print(f'{return_message} received back')
 
 ```
