@@ -25,8 +25,8 @@
 
 <h3>Course Instruction Pages</h3>
 <ol>
-    <li>Arduino IDE and Thonny IDE setup for ES8266 Mirocontroller programming ==> Refer to the PPT slides on Canvas for CIS 463 courese</li>
+    <li>Arduino IDE and Thonny IDE setup for ES8266 Mirocontroller programming --> Refer to the PPT slides on Canvas for CIS 463 courese</li>
     <li>Raspberry Pi 4 Setup Instructions --> <a href="./RaspberryPiSetup.md">Rappberry Pi Setup</a></li>
     <li>SITL Setup for MAVLink-Python-QGroundControl on WSL --> <a href="./SITLforRobotProgramTest.md">SITL Setup for Program Test</a></li>
-    <li></li>
+    <li>Python Programming for Autonomous Vehiche --> <a href="./ProgrammingForAutonomousVehicle.md">Programming for Autonomous Vehicle</a></li>
 </ol>
