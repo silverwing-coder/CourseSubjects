@@ -86,7 +86,7 @@ $ make clean
     <li>Port: 18570</li>
   </ul>
 </ul>
-<h4>QGroundContrl Drone Initaila Location</h4>
+<h4>QGroundContrl Drone Initaial Location --> VMI</h4>
 <p>Set environment variable at "Tools/simulation/gz/worlds/default.sdf"</p>
 
 ```
