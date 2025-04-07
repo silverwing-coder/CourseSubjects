@@ -1,11 +1,16 @@
-import cv2
 from ultralytics import YOLO
+import cv2
 import math
 import time
 
+
 def main():
-    # print('from main()')
-    model  = YOLO("./models/yolo11m.pt")
+    capture = cv2.VideoCapture(0)
+    model_path = 'models/yolo11m.pt'
+
+    detector = YOLO(model_path)
+    detector.to('cuda')
+
     class_names = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck", "boat",
                   "traffic light", "fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat",
                   "dog", "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe", "backpack", "umbrella",
@@ -17,40 +22,26 @@ def main():
                   "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase", "scissors",
                   "teddy bear", "hair drier", "toothbrush"
                   ]
-    capture = cv2.VideoCapture(0)
 
     while True:
+        start_time = int(time.time() * 1000)
         success, image = capture.read()
 
         if success:
-            start_time = int(round(time.time() * 1000))
-            results = model(image, stream=True)
-            # results = model.predict(image, stream=True)
-
-            for r in results:
-                # print(len(r))
-                boxes = r.boxes
-                for box in boxes:
+            results = detector(image, device='cuda')
+            for result in results:
+                # print(result)
+                for box in result.boxes:
                     confidence = math.ceil((box.conf[0] * 100)) / 100
-                    if confidence > 0.7:
-                        x1, y1, x2, y2 = box.xyxy[0]
-                        x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+                    if (confidence > 0.7):
+                        x1, y1, x2, y2 = int(box.xyxy[0][0]), int(box.xyxy[0][1]), int(box.xyxy[0][2]), int(box.xyxy[0][3])
+                        cv2.rectangle(image, (x1, y1),  (x2, y2), (255, 255, 255), 1)
+                        class_id = int(box.cls[0])
+                        cv2.putText(image, class_names[class_id], (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255 , 0), 2)
 
-                        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 2555), 2)
-                        print('Confidence--> ', confidence)
-                        cls = int(box.cls[0])
-                        print('Class name --> ', class_names[cls])
-
-                        origin = [x1, y1]
-                        font = cv2.FONT_HERSHEY_SIMPLEX
-                        font_scale = 1
-                        font_color = (255, 255, 255)
-                        thickness = 1
-                        cv2.putText(image, class_names[cls], origin, font, font_scale, font_color, thickness)
-
-            fps = int ((1 / (int(round(time.time() * 1000)) - start_time)) * 1000)
-            cv2.putText(image, "FPS:" + str(fps), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-            cv2.imshow('YOLOv11 DETECTION', image)
+        fps = int(1 / (int(time.time() * 1000) - start_time) * 1000)
+        cv2.putText(image, 'FPS:' + str(fps), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255 , 255), 2)
+        cv2.imshow('DETECTION MODEL', image)
 
         if cv2.waitKey(1) == ord('q'):
             break
