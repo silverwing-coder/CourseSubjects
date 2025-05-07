@@ -1,4 +1,5 @@
 import cv2
+
 # STEP 1: Import the necessary modules.
 import mediapipe as mp
 from mediapipe.tasks import python
