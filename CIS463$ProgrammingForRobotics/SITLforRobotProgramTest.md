@@ -86,6 +86,16 @@ $ make clean
     <li>Port: 18570</li>
   </ul>
 </ul>
+<h4>QGroundContrl Drone Initaial Location --> VMI</h4>
+<p>Set environment variable at "Tools/simulation/gz/worlds/default.sdf"</p>
+
+```
+<latitude_deg>37.790124</latitude_deg>
+<longitude_deg>-79.437285</longitude_deg>
+<elevation>1003</elevation>
+
+```
+
 
 <br/><h3>4. PX4 Development Environment </h3>
 <p>Giudes to setup PX4 development environment on Windows: WSL, PX4, QGroundControl, and Visual Studio Code</p>
