@@ -66,3 +66,5 @@ configured to demonstrate attack and defense techniques within isolated simulate
         <td>17</td>	<td>Course wrap-up</td>	<td>Class End: xx.xx</td>	<td>
     </tr>
 </table>
+
+<h4>Assignment help .... <a href = ./pseudo_code.py>Pseudo Code for Programming Lab</a><h4>
