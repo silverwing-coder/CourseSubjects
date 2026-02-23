@@ -7,7 +7,7 @@ mitigation, authentication, access control, and vulnerability analysis and defen
 emphasize the fundamental skills of cryptography implementation with Python. Closed networks will be 
 configured to demonstrate attack and defense techniques within isolated simulated environments. </p>
 
-<h4>Course Schudule</h4>
+<h3>Course Schudule</h3>
 <table>
     <tr> 
         <th>Week</th>

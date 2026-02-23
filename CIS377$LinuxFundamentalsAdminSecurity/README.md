@@ -3,7 +3,7 @@
 <h2>Linux Administration and Security</h2>
 <p>This course covers the fundamentals of the Linux operating system with two major Linux distributions of Debian-based (Ubuntu, Mint, etc.) and Red Hat-based (Fedora, CentOS, etc.). The course contents include core Linux concepts and installation, shell & command-line fundamentals, user/group management, Linux file system, software & package management, process & service management, basic networking and server management, security management, and shell scripting. This course focuses on the command-line interface (CLI) with hands-on labs enabling students to practice their skills. Students will obtain an understanding of and proficiency with essential Linux tools and modules for basic Linux system administration, networking, and security management. </p>
 
-<h4>Course Schedule</h4>
+<h3>Course Schedule</h3>
 
 <table>
     <tr> 
@@ -82,6 +82,10 @@ application</td>	<td>Final projet</td>
         <td>17</td>	<td>Final Test</td>	<td>Class End: xx.xx</td>	<td>
     </tr>
 </table>
+
+<h4>Textbook</h4>
+<em>LINUX with Operating System Concepts, Richard Fox-CRC Press, ISBN:
+9781482235890.</em>
 
 <h3>Linux distros for this course</h3>
 <ul>
