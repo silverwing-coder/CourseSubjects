@@ -1,6 +1,6 @@
 <h4>Last update: Sep. 2025</h4>
 
-<h2>CIS301-Lab: Computer Networking</h2>
+<h2>CIS301L: Computer Networking Lab</h2>
 <h4>Table of Contents </h4>
 1. Intro to wires / physical cables (ehternet, serial, and optical cables, WiFi)<br/>
 2. Intro to networking protocols
