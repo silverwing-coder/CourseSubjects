@@ -30,10 +30,10 @@ configured to demonstrate attack and defense techniques within isolated simulate
         <td>5</td>	<td>(L4) Transposition Cipher (Playfair Cipher)</td>	<td>Programming Assignment #2</td>
     </tr>
     <tr>
-        <td>6</td>	<td>(L5) Symmetric Encryption (XOR)	Programming</td>	<td>Assignment #3</td>
+        <td>6</td>	<td>(L5) Symmetric Encryption (XOR)	</td>	<td>Programming Assignment #3</td>
     </tr>
     <tr>
-        <td>7</td>	<td>(L6) Crypto code review, presentation, and discussion 	</td>	<td>Reading assignment #3</td>	<td>
+        <td>7</td>	<td>(L6) Crypto code review, presentation, and discussion 	</td>	<td>Reading/Lab assignment #3</td>	<td>
     </tr>
     <tr>
         <td>8 </td>	<td>(L7) Asymmetric Encryption (Toy RSA)</td>	<td>Programming Assignment #4</td>
@@ -48,7 +48,7 @@ configured to demonstrate attack and defense techniques within isolated simulate
         <td>11</td>	<td>(L9) Chatting program development in Python and discussion on security perspectives</td>	<td>Programming Assignment #6</td>
     </tr>
     <tr>
-        <td>12</td>	<td>(L10) Hash functions and password storage</td>	<td>Reading assignment #4</td>
+        <td>12</td>	<td>(L10) Hash functions and password storage</td>	<td>Reading/Lab assignment #4</td>
     </tr>
     <tr>
         <td>13</td>	<td>(L11) Login system implementation</td>	<td>Programming Assignment #7</td>
