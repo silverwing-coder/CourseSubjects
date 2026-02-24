@@ -1,7 +1,8 @@
 '''
-Will be posted after course completion.
+Last update: Jan. 2025 by Sangmork Park
+This psudo code is to provide a templete for lab assignments.
+(No fully implemented encryption/decryption codes will be posted.)   
 '''
-
 
 def encrypt_function(enc_key, file_name):
     pass
